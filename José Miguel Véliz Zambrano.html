@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>José Miguel Véliz Zambrano</title>
+    <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</head>
+<body>
+    <style>
+        #contenedorprincipal
+        {
+            font-family: "Times New Roman", monospace;
+            font-size: 24px;
+        }
+    </style>
+    <div id="contenedorprincipal">
+        <p><b>Autor: José Miguel Véliz Zambrano</b></p>
+        <p><b>Docente: Eddy Cevallos</b></p>
+        <p><b>Materia: Matemáticas</b></p>
+        <p><b>Año Lectivo: 2023-2024</b></p>
+        <p>Para visualizar este documento de una manera más atractiva, manténgase conectado a internet.</p>
+        <p>El código fuente de todo este documento está incluido en </p>
+        <p><b>Ejercicio 1:</b> Aplicando la fórmula de trapecios: <br> \( \int_{2}^{4} (2x-1) \, dx \) con n = 8</p>
+        <p id="resultado_1"></p>
+        <br>
+        <p><b>Ejercicio 2:</b> Aplicando la fórmula de trapecios: <br> \( \int_{-1}^{3} \sqrt{x^3+8} \, dx \) con n = 10</p>
+        <p id="resultado_2"></p>
+        <br>
+        <p><b>Ejercicio 3:</b> Aplicando la fórmula de Simpson 1/3: <br> \( \int_{2}^{4} \frac{\sqrt{x^3+1}}{x} \, dx \) con n = 8</p>
+        <p id="resultado_3"></p>
+    </div>
+    <script>
+        function imprimir_resultado(id, valor)
+        {
+            var elemento = document.getElementById(id); //una función que hice yo para imprimir resultados en la ventanam más fácilmente
+            elemento.innerText += valor + "\n";
+        }
+
+        //definiendo valores iniciales de la integral
+        var n_1 = 8;
+        var a_1 = 2;
+        var b_1 = 4;
+        var delta_x_1 = (b_1 - a_1)/n_1;
+        var suma_1 = 0;
+
+        function funcion_1(x) //definiendo la función en sí
+        {
+            return 2*x - 1;
+        }
+
+        for(i = a_1; i<=b_1; i+=delta_x_1) //el ciclo que hace la sumatoria
+        {
+            if(i == a_1 || i == b_1)
+            {
+                suma_1 += funcion_1(i)/2;
+            }
+            else
+            {
+                suma_1 += funcion_1(i);
+            }
+        }
+
+        suma_1 = suma_1*delta_x_1; //que no se nos olvide multiplicar el resultado por el valor de delta x
+
+        imprimir_resultado("resultado_1", "La sumatoria de la primer integral definida es " + suma_1); //imprimimos el resultado
+
+        //repetimos lo mismo pero con los valores del ejercicio 2
+        //definiendo valores iniciales de la integral
+        var n_2 = 10;
+        var a_2 = -1;
+        var b_2 = 3;
+        var delta_x_2 = (b_2 - a_2)/n_2;
+        var suma_2 = 0;
+
+        function funcion_2(x) //definiendo la función en sí
+        {
+            return Math.sqrt(x**3 + 8);
+        }
+
+        for(i = a_2; i<=b_2; i+=delta_x_2) //el ciclo que hace la sumatoria
+        {
+            if(i == a_2 || i == b_2)
+            {
+                suma_2 += funcion_2(i)/2;
+            }
+            else
+            {
+                suma_2 += funcion_2(i);
+            }
+        }
+
+        suma_2 = suma_2*delta_x_2; //que no se nos olvide multiplicar el resultado por el valor de delta x
+
+        imprimir_resultado("resultado_2", "La sumatoria de la segunda integral definida es " + suma_2);
+
+        //aquí el tercer ejercicio es diferente porque tenemos que aplicar otro método
+        //definimos variables
+        var n_3 = 8;
+        var a_3 = 2;
+        var b_3 = 4;
+        var delta_x_3 = (b_3 - a_3)/n_3;
+        var suma_3 = 0;
+
+        function funcion_3(x) //definiendo la función en sí
+        {
+            return (Math.sqrt(x**3 + 1))/(x);
+        }
+        for(i = a_3; i<=b_3; i+=delta_x_3) //el ciclo que hace la sumatoria
+        {
+            if(i == a_3 || i == b_3)
+            {
+                suma_3 += funcion_3(i);
+            }
+            else if(i % (delta_x_3*2) != 0)
+            {
+                suma_3 += funcion_3(i)*4;
+            }
+            else if(i % (delta_x_3)*2 == 0)
+            {
+                suma_3 += funcion_3(i)*2;
+            }
+        }
+        suma_3 = suma_3 * (delta_x_3/3);
+        imprimir_resultado("resultado_3", "La sumatoria de la tercera integral definida es " + suma_3);
+
+    </script>
+
+</body>
+</html>
